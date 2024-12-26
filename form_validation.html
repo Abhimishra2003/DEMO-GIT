@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(185, 152, 157);
+        }
+
+        div {
+            width: 100%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* border: 4px solid red; */
+            font-size: 15px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: bold;
+
+        }
+
+        input {
+            width: 80%;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            color: black;
+        }
+
+        div:nth-last-of-type(1) {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 10px;
+
+        }
+
+        button {
+            width: 70px;
+            height: 40px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        legend {
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+
+        }
+        span{
+            color: red;
+        }
+
+        form {
+            width: 320px;
+            /* height: 90%; */
+            background-color: yellow;
+        }
+    </style>
+
+</head>
+
+<body>
+    <section>
+        <form action="welcome.html" method="get" onsubmit="return validate()">
+            <fieldset>
+                <legend>registration form</legend>.
+                <div>
+
+                    <label for="un">username:</label>
+                    <input type="text" id="un" maxlength="15" minlength="2" name="un" autofocus
+                        placeholder="Enter your name" center>
+                    <span></span>
+                </div><br>
+
+                <div>
+                    <label for="text">password:</label>
+                    <input type="text" name="pass" values="" placeholder="confirm your password" maxlength="8">
+                    <span></span>
+                </div> <br>
+                <div>
+                    <label for="text">confirm-password:</label>
+                    <input type="comfirm-password" name="pass" maxlength="8" placeholder="confirm your password">
+                    <span></span>
+                </div> <br>
+                <div>
+                    <label for="text">email-id:</label>
+                    <input type="text" placeholder="Ente    r your email-id">
+                    <span></span>
+                </div> <br>
+                <div>
+                    <label for="text">Mobile number: +91</label>
+                    <input type="tel" placeholder=" Your 10 digit mobile number" maxlength="10">
+                    <span></span>
+                </div> <br>
+                <div>
+                    <button type="submit">sumbit</button>
+                    <button>reset</button>
+                </div>
+            </fieldset>
+        </form>
+
+
+    </section>
+    <script>
+        function validate() {
+            let inputs = document.querySelectorAll("input");
+
+            let user = inputs[0].value;
+            let pass = inputs[1].value;
+            let cpass = inputs[2].value;
+            let email = inputs[3].value;
+            let mob = inputs[4].value;
+            // console.log(user, pass, cpass, email, mobile)
+
+            let spanmsg = document.querySelectorAll("span");
+            // console.log(spanmsg)
+            if (user == "") {
+                spanmsg[0].innerHTML = "filed cannot be empty.";
+                return false;
+            }
+            else if (!isNaN(user)) {
+                spanmsg[0].innerHTML = "Invalid inputs numbers are not allowed";
+                return false;
+
+            }
+            else {
+                spanmsg[0].innerHTML = "";
+
+            }
+            if(pass.length<8||pass ==""){
+    spanmsg[1].innerHTML ="Minimum 8 characters are required and it must be combination of uppercase,lowercase,numbers and symbold. ";
+    return false;
+}
+else if (pass.search(/[a-z]/)==-1 ||pass.search(/[A-Z]/)==-1||pass.search(/[0-9]/)==-1|| pass.search(/[@/$/%/#/!]/)==-1){
+    spanmsg[1].innerHTML ="Atleast 1 lowercase,1uppercase,and lspecial character is required.";
+return false;
+}
+else{
+    spanmsg[1].innerHTML = "";
+}
+
+
+//cpassword
+if(cpass ==""){
+            spanmsg[2].innerHTML="please fill the empty space with your password.";
+            return false;
+        }
+        else if (cpass !==pass){
+            spanmsg[2].innerHTML="password is not matching.";
+ return false;
+
+        }
+        else{
+    spanmsg[2].innerHTML = "";
+
+        }
+
+        //
+        if(email==""){
+            spanmsg[3].innerText="please fill the empty space with your email.";
+            return false;
+        }
+        else if(email.indexOf('@')<= 1 || email.indexOf('.')<= 1){
+            spanmsg[3].innerText = "wraning ! invalid email...."
+            return false
+
+        }else if(email.charAt(email.length - 4)!= '.' && email.charAt(email.length - 3)!= '.'|| email.search(/[@.]{2,}/)!=-1){
+            spanmsg[3].innerText = "wraning ! invalid email...."
+            return false
+
+        }
+        else{
+            spanmsg[3].innerHTML=""
+        }
+
+//         mobile
+        if(mob==""){
+            spanmsg[4].innerHTML="mobile number is mandatory "
+            return false;
+        }
+        else if(isNaN(mob)||mob.length<10){
+spanmsg[4].innerHTML="Invalid input";
+return false;
+        }
+        else{
+            spanmsg[4].innerHTML=="";
+        }
+        }
+      
+
+
+    </script>
+
+</body>
+
+</html>
